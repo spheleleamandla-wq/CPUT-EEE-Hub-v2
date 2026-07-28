@@ -45,7 +45,7 @@ st.markdown(f"""<style>
 .profile-pic{{border-radius:50%;border:3px solid {CPUT_GOLD};}}
 </style>""", unsafe_allow_html=True)
 
-st.markdown(f"""<div class="header"><img src="{CPUT_LOGO_URL}" width="80"><div><h1>{APP_NAME}</h1><p>{APP_SUB}</p></div></div>""", unsafe_allow_html=True)
+st.markdown(f"""<div class="header"><div><h1>{APP_NAME}</h1>{APP_NAME}</h1><p>{APP_SUB}</p></div></div>""", unsafe_allow_html=True)
 st.caption(DEVELOPER)
 
 def load(f):
