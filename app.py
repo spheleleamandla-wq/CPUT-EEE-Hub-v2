@@ -1,4 +1,15 @@
 import streamlit as st
+# Force text visibility for both themes
+    st.markdown("""
+    <style>
+    .stApp {
+        color: var(--text-color);
+    }
+    h1, h2, h3, h4, h5, h6, p, label, div {
+        color: var(--text-color) !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 import re, json, os, base64, time, random, pathlib
 from datetime import datetime
 from fpdf import FPDF
