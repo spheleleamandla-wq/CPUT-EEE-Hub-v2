@@ -21,7 +21,7 @@ CPUT_BLUE = "#003366"; CPUT_GOLD = "#FFB81C"
 CPUT_LOGO_URL = "https://www.cput.ac.za/images/cput-logo.png"
 APP_NAME = "CPUT EE Student Hub"
 APP_SUB = "Electrical & Electronic Engineering - Student Tools"
-DEVELOPER = "Developed by: Sphelele Amandla | CPUT Electrical Engineering"
+DEVELOPER = "Developed by: Sphelele Amandla Nxumalo | CPUT Electrical Engineering"
 
 # DATA FOLDER FOR STREAMLIT CLOUD - THIS IS THE KEY FIX
 DATA_DIR = pathlib.Path("data")
@@ -34,7 +34,7 @@ ASSIGN_FILE = DATA_DIR / "cput_assignments.json"
 GRADES_FILE = DATA_DIR / "cput_grades.json"
 ADMIN_PASSWORD = "CPUTadmin2026!"
 
-CPUT_COURSES = ["Electrical Engineering - ND", "Electrical Engineering - BEngTech", "Mechanical Engineering - ND", "Information Technology", "Civil Engineering - ND", "Chemical Engineering", "Business Management"]
+CPUT_COURSES = ["Electrical Engineering - ND", "Electrical Engineering - BEngTech", "Mechanical Engineering - ND", "Information Technology", "Civil Engineering - ND", "Chemical Engineering", "Computer Engineering"]
 
 st.markdown(f"""<style>
 .stApp{{background:#F0F2F6;}}
@@ -45,7 +45,7 @@ st.markdown(f"""<style>
 .profile-pic{{border-radius:50%;border:3px solid {CPUT_GOLD};}}
 </style>""", unsafe_allow_html=True)
 
-st.markdown(f"""<div class="header"><img src="{CPUT_LOGO_URL}" width="90"><div><h1>{APP_NAME}</h1><p>{APP_SUB}</p></div></div>""", unsafe_allow_html=True)
+st.markdown(f"""<div class="header"><img src="{CPUT_LOGO_URL}" width="80"><div><h1>{APP_NAME}</h1><p>{APP_SUB}</p></div></div>""", unsafe_allow_html=True)
 st.caption(DEVELOPER)
 
 def load(f):
