@@ -194,8 +194,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 is_allowed_zone, country_code, country_title = verify_geofence_access()
-else:
-    # --- ADMIN WORKSPACE PORTAL ---
+# --- ADMIN WORKSPACE PORTAL ---
     if st.session_state.admin_logged_in:
         st.title("⚙️ Internal Admin Management Dashboard")
         if st.button("⬅️ Exit Admin Workspace & Log Out"):
