@@ -196,7 +196,7 @@ st.markdown("""
 st.title("BETTING MADE EASIER Dashboard")
 
 # --- ADMIN WORKSPACE PORTAL ---
-    if st.session_state.admin_logged_in:
+if st.session_state.admin_logged_in:
         st.title("⚙️ Internal Admin Management Dashboard")
         if st.button("⬅️ Exit Admin Workspace & Log Out"):
             st.session_state.admin_logged_in = False
