@@ -53,7 +53,6 @@ def get_user_profile(email):
     row = cursor.fetchone()
     conn.close()
     if row:
-        # FIXED: use row indexes instead of assigning whole tuple
         return {"first_name": row[0], "last_name": row[1], "balance": row[2], "exclusion": row[3]}
     return None
 
@@ -192,13 +191,9 @@ st.markdown("""
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
    .spinning-wheel-ui { width: 180px; height: 180px; border-radius: 50%; border: 6px solid #c5a059; background: conic-gradient(#d32f2f 0deg 32.7deg, #121212 32.7deg 65.4deg, #d32f2f 65.4deg 98.1deg, #121212 98.1deg 130.8deg, #d32f2f 130.8deg 163.5deg, #7f8c8d 163.5deg 196.2deg, #121212 196.2deg 228.9deg, #d32f2f 228.9deg 261.6deg, #121212 261.6deg 294.3deg, #d32f2f 294.3deg 327deg, #121212 327deg 360deg); animation: spin 0.8s linear infinite; margin-bottom: 15px; }
     </style>
-""", unsafe_allow_html=True) # FIXED: removed extra 'ed'
+""", unsafe_allow_html=True)
 
 is_allowed_zone, country_code, country_title = verify_geofence_access()
-
-if not is_allowed_zone:
-    st.title("🚫 Territorial Regulatory Lockout")
-    st.error(f"Access Denied. Your detected IP origin ({country_title}) is restricted.")
 else:
     # --- ADMIN WORKSPACE PORTAL ---
     if st.session_state.admin_logged_in:
