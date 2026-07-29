@@ -193,7 +193,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.title("BETTING MADE EASIER Dashboard"
+st.title("BETTING MADE EASIER Dashboard")
 
 # --- ADMIN WORKSPACE PORTAL ---
     if st.session_state.admin_logged_in:
