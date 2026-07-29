@@ -195,21 +195,66 @@ st.markdown("""
 
 st.title("BETTING MADE EASIER Dashboard")
 
+# --- AUTH TABS ---
+if not st.session_state.current_user and not st.session_state.admin_logged_in:
+    tab_login, tab_register = st.tabs(["🔑 Login", "📝 Register"])
+    
+    with tab_login:
+        st.subheader("Login to your account")
+        login_email = st.text_input("Email", key="login_email")
+        login_pass = st.text_input("Password", type="password", key="login_pass")
+        if st.button("Login"):
+            if authenticate_user(login_email, login_pass):
+                st.session_state.current_user = login_email.lower().strip()
+                st.success("Logged in!")
+                st.rerun()
+            else:
+                st.error("Invalid email or password")
+    
+    with tab_register:
+        st.subheader("Create new account")
+        reg_email = st.text_input("Email", key="reg_email")
+        reg_pass = st.text_input("Password", type="password", key="reg_pass")
+        reg_first = st.text_input("First Name")
+        reg_last = st.text_input("Last Name")
+        reg_mobile = st.text_input("Mobile")
+        reg_id = st.text_input("ID Number")
+        if st.button("Register"):
+            success, msg = register_new_user(reg_email, reg_pass, reg_first, reg_last, reg_mobile, reg_id)
+            if success:
+                st.success("Account created! Please login.")
+            else:
+                st.error(msg)
+
+# --- USER DASHBOARD ---
+elif st.session_state.current_user:
+    profile = get_user_profile(st.session_state.current_user)
+    st.metric("Wallet Balance", f"R {profile['balance']:.2f}")
+    
+    if st.button("Logout"):
+        st.session_state.current_user = None
+        st.rerun()
+    
+    user_tab1, user_tab2 = st.tabs(["🎲 Casino", "🏆 Sportsbook"])
+    with user_tab1:
+        st.write("Casino games go here")
+    with user_tab2:
+        st.write("Sports fixtures go here")
+
 # --- ADMIN WORKSPACE PORTAL ---
-if st.session_state.admin_logged_in:
-        st.title("⚙️ Internal Admin Management Dashboard")
-        if st.button("⬅️ Exit Admin Workspace & Log Out"):
-            st.session_state.admin_logged_in = False
-            st.rerun()
-        st.markdown("---")
-        adm_tab1, adm_tab2 = st.tabs(["📊 Accounts Ledger & Controls", "📜 Immutable System Audit Logs & Data Export"])
+elif st.session_state.admin_logged_in:
+    st.title("⚙️ Internal Admin Management Dashboard")
+    if st.button("⬅️ Exit Admin Workspace & Log Out"):
+        st.session_state.admin_logged_in = False
+        st.rerun()
+    st.markdown("---")
+    adm_tab1, adm_tab2 = st.tabs(["📊 Accounts Ledger & Controls", "📜 Immutable System Audit Logs & Data Export"])
 
-        with adm_tab1:
-            st.subheader("👥 Registered System Accounts Ledger")
-            all_users_df = admin_get_all_users()
-            st.dataframe(all_users_df, use_container_width=True)
-
+    with adm_tab1:
+        st.subheader("👥 Registered System Accounts Ledger")
+        all_users_df = admin_get_all_users()
+        st.dataframe(all_users_df, use_container_width=True)  
             st.markdown("---")
-            st.subheader("🛠️ Balance & Account Management Hub")
+           st.subheader("🛠️ Balance & Account Management Hub")
             if not all_users_df.empty:
                 target_user = st.selectbox("Select Target User Account profile", all_users_df["email"].tolist())
